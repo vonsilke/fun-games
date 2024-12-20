@@ -23,10 +23,10 @@
 - Auto Puzzle
 - Auto kill Animal
 - Kill Aura
-   - instant kill enemy in Illusive Realm
 - Mob Vacuum (NOT WORKING)
 
 #### Buff
+- Super buff
 - 9999% Atk
 - 50% Echo Drop
 - 50% Gold
@@ -34,6 +34,10 @@
 
 #### Teleport
 - Custom Teleport
+- Teleport list
+   - 100% all map
+   - All Echoes
+   - Farm echoes set
 - Auto teleport
 
 ## First Step
@@ -49,5 +53,3 @@
      ![QUEST](https://i.imgur.com/JdLxs63.png)
    - NOW YOU CAN USE `Kill Aura` when entering Illusive Realm showing difficulty level
      ![DIIFFICULTY LEVEL](https://i.imgur.com/pJB2yWE.png)
-- Dont use `Skip Cutscene` in Depths of Illusive
-- If you use `Skip Cutscene` when talking on NPC and missing UI just press `ALT + X`
