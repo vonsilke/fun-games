@@ -1,5 +1,5 @@
 # MAUNG MOD RELEASE 1.4
-![zzzz](https://raw.githubusercontent.com/saefulbarkah/MAUNG-MOD/main/menu.png)
+![zzzz](https://raw.githubusercontent.com/saefulbarkah/Maung-WW-Releases/refs/heads/main/menu.png)
 
 ## Features
 - Open mod Menu (Alt + X) 
