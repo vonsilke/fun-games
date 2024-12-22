@@ -1,8 +1,22 @@
 # 1.4
 ![zzzz](https://raw.githubusercontent.com/saefulbarkah/Maung-WW-Releases/refs/heads/main/menu.png)
 
+## First Step
+- Go to [Releases](https://github.com/saefulbarkah/MAUNG-MOD/releases/download/1.4/ww-mod-1.4.rar) And download it
+- Extract and run `launch.exe`
+- Select `Wuthering Waves` folder
+- While in login menu showing `MAUNG MOD LOADED` you can open menu with `ALT + X`
+- Enjoy!
+
+## DISABLE LOGS
+- Open diretory `Wuthering Waves\Wuthering Waves Game\Client\Saved`
+- Find folder `Logs` right click select `Properties`
+- Go to `Security tab` click edit
+- Scroll down on `Permission list` find `Full Control` and check the deny box
+- Apply, enjoy!
+
 ## Features
-- Open mod Menu (Alt + X) 
+- Open mod Menu (Alt + X)
 
 #### Player
 - God Mode
@@ -39,10 +53,3 @@
    - All Echoes
    - Farm echoes set
 - Auto teleport
-
-## First Step
-- Go to [Releases](https://github.com/saefulbarkah/MAUNG-MOD/releases/download/1.4/ww-mod-1.4.rar) And download it
-- Extract and run `launch.exe`
-- Select `Wuthering Waves` folder
-- While in login menu showing `MAUNG MOD LOADED` you can open menu with `ALT + X`
-- Enjoy!
