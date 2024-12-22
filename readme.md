@@ -6,14 +6,13 @@
 - Extract and run `launch.exe`
 - Select `Wuthering Waves` folder
 - While in login menu showing `MAUNG MOD LOADED` you can open menu with `ALT + X`
-- Enjoy!
 
 ## DISABLE LOGS
 - Open diretory `Wuthering Waves\Wuthering Waves Game\Client\Saved`
 - Find folder `Logs` right click select `Properties`
 - Go to `Security tab` click edit
 - Scroll down on `Permission list` find `Full Control` and check the deny box
-- Apply, enjoy!
+- Apply
 
 ## Features
 - Open mod Menu (Alt + X)
