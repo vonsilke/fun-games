@@ -18,6 +18,7 @@
 - Open mod Menu (Alt + X)
 
 #### Player
+- Player Speed
 - God Mode
 - No Cooldown Skill (Include Inf forte, Energy, auto QTE)
 - Hit Muliplier -> Max 100
