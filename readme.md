@@ -42,7 +42,7 @@
 #### Buff
 - Illusive Sprint
 - Super buff
-- 50% Echo Drop
+- 50% Echo
 - 50% Gold
 - 50% Mats
 
