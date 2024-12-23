@@ -24,7 +24,6 @@
 - Hit Muliplier -> Max 100
 - Always Critical Hit
 - Infinite Stamina
-- Custom Skill
 - Mark Teleport
 - Quest Teleport
 
