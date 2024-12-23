@@ -39,6 +39,7 @@
 - Mob Vacuum (NOT WORKING)
 
 #### Buff
+- Illusive Sprint
 - Super buff
 - 9999% Atk
 - 50% Echo Drop
