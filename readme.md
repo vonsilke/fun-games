@@ -36,12 +36,12 @@
 - Auto Puzzle
 - Auto kill Animal
 - Kill Aura
-- Mob Vacuum (NOT WORKING)
+- Mob Vacuum
+- Collection Vacuum
 
 #### Buff
 - Illusive Sprint
 - Super buff
-- 9999% Atk
 - 50% Echo Drop
 - 50% Gold
 - 50% Mats
