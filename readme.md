@@ -1,4 +1,4 @@
-# 1.4
+# 1.4 GLOBAL VERSION
 ![zzzz](https://raw.githubusercontent.com/saefulbarkah/Maung-WW-Releases/refs/heads/main/menu.png)
 
 ## First Step
