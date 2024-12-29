@@ -4,7 +4,7 @@
 - Go to [Releases](https://github.com/saefulbarkah/fun-games/releases) And download it
 - Extract and run `launch.exe`
 - Select `Wuthering Waves` folder
-- While in login menu showing `MAUNG MOD LOADED` you can open menu with `ALT + X`
+- While in login menu showing `MOD LOADED` you can open menu with `ALT + X`
 
 ## DISABLE LOGS
 - Open diretory `Wuthering Waves\Wuthering Waves Game\Client\Saved`
