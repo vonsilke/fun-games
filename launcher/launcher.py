@@ -123,7 +123,7 @@ def downloadResources():
         "patch_fix": "bypass/ww-patch.dll",
         "winhttp": "bypass/winhttp.dll",
     }
-    loader = "hotpatch/~mods/loader.pak"
+    loader = "loader/~mods/loader.pak"
 
     # List of files to download (relative paths)
     files_to_download = [maung_pak, tp_file_pak]
