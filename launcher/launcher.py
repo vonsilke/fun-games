@@ -87,12 +87,12 @@ def downloadResources():
     )
 
     cfg = loadConfig()
-    game_dir = os.path.join(cfg["game_dir"], "Mod/MaungMod/")
+    game_dir = os.path.join(cfg["game_dir"], "Mod/Pak/")
     loader_pak_directory = os.path.join(cfg["game_paks_directory"], "~mods")
 
     debug_pak = "debug/debug_P99.pak"
-    maung_pak = "Mod/MaungMod/MaungMod.pak"
-    tp_file_pak = "Mod/MaungMod/TPFile.pak"
+    mod_pak = "Mod/Pak/wuwa_1.4.pak"
+    tp_file_pak = "Mod/Pak/TPFile.pak"
     bypass_sig_pak = {
         "libaries": "bypass/libraries.txt",
         "patch_fix": "bypass/ww-patch.dll",
@@ -101,7 +101,7 @@ def downloadResources():
     loader = "loader/~mods/loader.pak"
 
     # List of files to download (relative paths)
-    files_to_download = [maung_pak, tp_file_pak]
+    files_to_download = [mod_pak, tp_file_pak]
     files_to_download += list(bypass_sig_pak.values())  # Add bypass files
     if cfg["debug_mode"] == "true":
         files_to_download += [debug_pak]
@@ -126,7 +126,7 @@ def downloadResources():
             if download_url:
                 # Initialize local path for saving the file
                 local_path = None
-                if file_path == maung_pak:
+                if file_path == mod_pak:
                     local_path = os.path.join(game_dir, "MaungMod.pak")
                 elif file_path == tp_file_pak:
                     local_path = os.path.join(game_dir, "TPFile.pak")
