@@ -72,28 +72,6 @@ def show_console():
         ctypes.windll.user32.ShowWindow(hwnd, 5)  # 5 = SW_SHOW
 
 
-def checkingGameVersion(API_URL):
-    base_url = os.path.join(API_URL, "need_to_update.txt")
-    response = requests.get(
-        base_url,
-    )
-    if response.status_code == 200:
-        file_data = response.json()
-        need_to_update = base64.b64decode(file_data["content"]).decode("utf-8")
-        if need_to_update.lower() == "true":
-            print("Error: Mod need to update")
-            logging.error(f"Mod need to update")
-            webbrowser.open("https://github.com/saefulbarkah/fun-games")
-            input("Press Enter to exit...")
-            return sys.exit(1)
-
-    else:
-        print(f"Failed to fetch file: {response.status_code}")
-        logging.error(f"Failed to fetch file: {response.status_code}")
-        print(response.json())
-        return None
-
-
 def is_process_running(process_name: str) -> bool:
     """Check if a process with the given name is running."""
     for process in psutil.process_iter(["name"]):
@@ -107,9 +85,6 @@ def downloadResources():
     base_url = (
         "https://api.github.com/repos/saefulbarkah/fun-games/contents/launcher/pak/"
     )
-
-    print("Installing mod, please wait...")
-    checkingGameVersion(base_url)
 
     cfg = loadConfig()
     game_dir = os.path.join(cfg["game_dir"], "Mod/MaungMod/")
@@ -303,7 +278,7 @@ def loadConfig() -> loadTyped:
         return e
 
 
-def runExecutableAsAdmin(executable_path, args=""):
+def runProgram(executable_path, args=""):
     try:
 
         # Start the process as admin
@@ -407,6 +382,7 @@ def runningGame():
         )
         input("Press enter to exit.....")
         return sys.exit(1)
+    print("Version 1.4")
 
     try:
         checkAndSaveConfig()
@@ -418,8 +394,9 @@ def runningGame():
 
         if game_pak_dir:
             if os.path.exists(game_executable_path):
+                print("Installing mod, please wait...")
                 downloadResources()
-                runExecutableAsAdmin(
+                runProgram(
                     os.path.join(
                         game_executable_path,
                         "Client-Win64-Shipping.exe",
