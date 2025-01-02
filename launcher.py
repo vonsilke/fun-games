@@ -42,10 +42,11 @@ import psutil
 config = ConfigParser()
 
 filter_file_deleted = [
-    "ww-patch.dll",
     "libraries.txt",
     "winhttp.dll",
 ]
+ww_os_pak = "ww-patch-os.dll"
+ww_cn_pak = "ww-patch-cn.dll"
 
 
 def hide_console():
@@ -93,6 +94,7 @@ def createDefaultConfig():
         config.set("CONFIG", "debug_dir", "./pak/debug")
         config.set("CONFIG", "mod_directory", "./pak/Mod")
         config.set("CONFIG", "debug_mode", "false")
+        config.set("CONFIG", "version", "")
 
         with open("config.ini", "w") as configFile:
             config.write(configFile)
@@ -144,6 +146,9 @@ def checkAndSaveConfig():
         print("Wuthering Waves not found, please select a directory.")
         saveGameDirectory()
 
+    if not config.has_option("CONFIG", "version"):
+        setGameVersion()
+
     game_folder = config.get("CONFIG", "game_paks_directory").strip('"')
 
     if not game_folder:
@@ -161,6 +166,7 @@ class loadTyped(TypedDict):
     game_dir: str
     debug_dir: str
     debug_mode: str
+    version: str
 
 
 def loadConfig() -> loadTyped:
@@ -175,6 +181,7 @@ def loadConfig() -> loadTyped:
         game_dir = config.get("CONFIG", "game_dir").strip('"')
         debug_mode = config.get("CONFIG", "debug_mode").strip('"').lower()
         debug_dir = config.get("CONFIG", "debug_dir").strip('"')
+        version = config.get("CONFIG", "version").strip('"')
         return {
             "game_paks_directory": game_paks_directory,
             "mod_directory": mod_directory,
@@ -185,6 +192,7 @@ def loadConfig() -> loadTyped:
             "game_dir": game_dir,
             "debug_mode": debug_mode,
             "debug_dir": debug_dir,
+            "version": version,
         }
     except Exception as e:
         print(f"Error reading config: {e}")
@@ -308,6 +316,31 @@ def copyFilesToGameDirectory(target_directory, source_folder):
         logging.error(f"Error copying files: {e}")
 
 
+def copyFileToGameDirectory(target_directory, source_file):
+    # Ensure target directory exists
+    if not os.path.exists(target_directory):
+        os.makedirs(target_directory)
+
+    # Ensure the source file exists
+    if not os.path.isfile(source_file):
+        print(f"Source file '{source_file}' does not exist.")
+        logging.error(f"Source file '{source_file}' does not exist.")
+        return sys.exit(1)
+
+    # Get the filename from the source path
+    filename = os.path.basename(source_file)
+    target_file = os.path.join(target_directory, filename)
+
+    try:
+        # Copy the file to the target directory
+        shutil.copy2(source_file, target_file)
+        logging.info(f"File '{filename}' successfully copied to '{target_directory}'.")
+    except Exception as e:
+        print(f"Error copying file: {e}")
+        logging.error(f"Error copying file: {e}")
+        return sys.exit(1)
+
+
 def copyFolderToGameDirectory(target_directory, source_folder):
     target_folder = os.path.join(target_directory, os.path.basename(source_folder))
     try:
@@ -322,6 +355,64 @@ def copyFolderToGameDirectory(target_directory, source_folder):
         print(f"Error copying folder: {e}")
 
 
+def setGameVersion():
+    while True:
+        clear_console()
+        print("Select Game Version")
+        print("\t1. OS Version (Global)")
+        print("\t2. CN Version")
+
+        ver = input("Select: ").strip()
+
+        if ver == "1":
+            config.set("CONFIG", "version", "OS")
+            with open("config.ini", "w") as configfile:
+                config.write(configfile)  # Save the config to the file
+            clear_console()
+            time.sleep(2)
+            return ww_os_pak  # Ensure the function exits after setting the version
+
+        elif ver == "2":
+            config.set("CONFIG", "version", "CN")
+            with open("config.ini", "w") as configfile:
+                config.write(configfile)  # Save the config to the file
+            clear_console()
+            time.sleep(2)
+            return ww_cn_pak  # Ensure the function exits after setting the version
+
+        else:
+            clear_console()
+            input("Invalid input, press Enter to try again...")
+            time.sleep(1)
+            clear_console()
+
+
+def checkGameVersion():
+    config = loadConfig()
+    defaultGameVer = ""
+
+    # If version is not set, call setGameVersion() only once
+    if not config.get("version"):  # Use get to prevent KeyError if "version" is missing
+        defaultGameVer = setGameVersion()
+
+    # Check if the version is valid (either "CN" or "OS")
+    if config["version"] != "CN" and config["version"] != "OS":
+        defaultGameVer = setGameVersion()
+
+    # Set the default game version based on config
+    if config["version"] == "CN":
+        defaultGameVer = "ww-patch-cn.dll"
+
+    if config["version"] == "OS":
+        defaultGameVer = "ww-patch-os.dll"
+
+    # Write the selected game version to the file
+    with open("./pak/bypass/libraries.txt", "w") as file:
+        file.write(defaultGameVer)
+
+    return defaultGameVer
+
+
 def runningGame():
     if is_process_running("Client-Win64-Shipping.exe"):
         print(
@@ -332,7 +423,7 @@ def runningGame():
         )
         input("Press enter to exit.....")
         return sys.exit(1)
-    print("Version 1.4")
+    print("Version 2.0")
 
     try:
         checkAndSaveConfig()
@@ -349,8 +440,18 @@ def runningGame():
 
         if game_pak_dir:
             if os.path.exists(game_executable_path):
+                getVersion = checkGameVersion()
                 print("Installing mod, please wait...")
-                copyFilesToGameDirectory(game_executable_path, bypass_sig)
+                # copyFilesToGameDirectory(game_executable_path, bypass_sig)
+                copyFileToGameDirectory(
+                    game_executable_path, "./pak/bypass/winhttp.dll"
+                )
+                copyFileToGameDirectory(
+                    game_executable_path, f"./pak/bypass/{getVersion}"
+                )
+                copyFileToGameDirectory(
+                    game_executable_path, f"./pak/bypass/libraries.txt"
+                )
                 copyFolderToGameDirectory(game_pak_dir, loader_dir)
                 copyFolderToGameDirectory(game_dir, mod_dir)
                 if debug_mode == "true":
@@ -360,22 +461,23 @@ def runningGame():
                     )
 
                 time.sleep(2)
-                runProgram(
-                    os.path.join(
-                        game_executable_path,
-                        "Client-Win64-Shipping.exe",
-                    )
-                )
-                deleteModDirectory(game_dir, "Mod")
-                deleteModDirectory(game_pak_dir, "~mods")
-                delete_files_from_list(binaries_dir, filter_file_deleted)
-                time.sleep(1)
+                print("Running Program....")
+                # runProgram(
+                #    os.path.join(
+                #        game_executable_path,
+                #        "Client-Win64-Shipping.exe",
+                #    )
+                # )
+                # deleteModDirectory(game_dir, "Mod")
+                # deleteModDirectory(game_pak_dir, "~mods")
+                # delete_files_from_list(binaries_dir, filter_file_deleted.append(getVersion))
+                # time.sleep(1)
             else:
                 print(
-                    f"Executable '{game_executable_path}' does not exist. Try to delete config.ini"
+                    f"Executable '{game_executable_path}' does not exist make sure select Wuthering Waves folder, Try to delete config.ini"
                 )
                 logging.error(
-                    f"Executable '{game_executable_path}' does not exist. Try to delete config.ini"
+                    f"Executable '{game_executable_path}' does not exist make sure select Wuthering Waves folder, Try to delete config.ini"
                 )
         else:
 
