@@ -1,4 +1,4 @@
-# 2.0 GLOBAL VERSION
+# 2.0
 
 ## First Step
 1. Download and install [Python](https://www.python.org/ftp/python/3.13.1/python-3.13.1-amd64.exe)
