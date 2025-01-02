@@ -358,11 +358,12 @@ def copyFolderToGameDirectory(target_directory, source_folder):
 def setGameVersion():
     while True:
         clear_console()
-        print("Select Game Version")
-        print("\t1. OS Version (Global)")
-        print("\t2. CN Version")
+        print("Select Game Version: \n")
+        print("  1. OS Version (Global)")
+        print("  2. CN Version")
+        print("\nPlease select a version (1 or 2): ", end="")
 
-        ver = input("Select: ").strip()
+        ver = input().strip()
 
         if ver == "1":
             config.set("CONFIG", "version", "OS")
@@ -459,18 +460,17 @@ def runningGame():
                     copyFilesToGameDirectory(
                         os.path.join(game_pak_dir, "~mods/"), debug_dir
                     )
-
                 time.sleep(2)
-                print("Running Program....")
-                # runProgram(
-                #    os.path.join(
-                #        game_executable_path,
-                #        "Client-Win64-Shipping.exe",
-                #    )
-                # )
-                # deleteModDirectory(game_dir, "Mod")
-                # deleteModDirectory(game_pak_dir, "~mods")
-                # delete_files_from_list(binaries_dir, filter_file_deleted.append(getVersion))
+                runProgram(
+                    os.path.join(
+                        game_executable_path,
+                        "Client-Win64-Shipping.exe",
+                    )
+                )
+                filter_file_deleted.extend([ww_os_pak, ww_cn_pak])
+                deleteModDirectory(game_dir, "Mod")
+                deleteModDirectory(game_pak_dir, "~mods")
+                delete_files_from_list(binaries_dir, filter_file_deleted)
                 # time.sleep(1)
             else:
                 print(
