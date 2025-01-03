@@ -8,9 +8,10 @@
 
 ## DISABLE LOGS
 - Open diretory `Wuthering Waves\Wuthering Waves Game\Client\Saved`
-- Find folder `Logs` right click select `Properties`
+- Open folder `Logs` delete all inside with file named .log
+- Right click on folder `Logs` click properties
 - Go to `Security tab` click edit
-- Scroll down on `Permission list` find `Full Control` and check the deny box
+- ![Capture](https://github.com/user-attachments/assets/60defe45-9d19-44ed-99db-70ed0430f946)
 - Apply
 
 ## Features
