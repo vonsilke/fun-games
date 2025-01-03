@@ -1,19 +1,17 @@
-# 2.0
+# 2.0 GLOBAL VERSION
 
 ## HOW TO USE
-1. Download and install [Python](https://www.python.org/ftp/python/3.13.1/python-3.13.1-amd64.exe)
-      - Step installation, check the box `Add ptyhon.exe to PATH` after that click `Install Now`
-      ![images](https://raw.githubusercontent.com/saefulbarkah/fun-games/refs/heads/main/how_to_install_python.PNG)
-2. Go to [Releases](https://github.com/saefulbarkah/fun-games/releases) download latest version, extract it.
-2. Run `run.bat`
+1. Download [launcher](https://github.com/saefulbarkah/fun-games/releases/download/2.0-launcher/fun-games-launcher.rar)
+2. Extract it, run laucher.exe
 3. Select `Wuthering Waves` folder
 4. While in login menu showing `MOD LOADED` you can open menu with `ALT + X`
 
 ## DISABLE LOGS
 - Open diretory `Wuthering Waves\Wuthering Waves Game\Client\Saved`
-- Find folder `Logs` right click select `Properties`
+- Open folder `Logs` delete all inside with file named .log
+- Right click on folder `Logs` click properties
 - Go to `Security tab` click edit
-- Scroll down on `Permission list` find `Full Control` and check the deny box
+- ![Capture](https://github.com/user-attachments/assets/60defe45-9d19-44ed-99db-70ed0430f946)
 - Apply
 
 ## Features
@@ -28,6 +26,7 @@
 - Infinite Stamina
 - Mark Teleport
 - Quest Teleport
+- No Clip
 
 #### World
 - World Speed
