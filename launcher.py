@@ -9,6 +9,7 @@ from typing import TypedDict
 import sys
 import psutil
 import logging
+import argparse
 
 log_file = "launcher.log"
 logging.basicConfig(
@@ -73,6 +74,7 @@ def createDefaultConfig():
         config.set("CONFIG", "mod_directory", "./pak/Mod")
         config.set("CONFIG", "debug_mode", "false")
         config.set("CONFIG", "version", "")
+        config.set("CONFIG", "dx11", "true")
 
         with open("config.ini", "w") as configFile:
             config.write(configFile)
@@ -139,6 +141,7 @@ class loadTyped(TypedDict):
     debug_dir: str
     debug_mode: str
     version: str
+    dx11: str
 
 
 def loadConfig() -> loadTyped:
@@ -154,6 +157,7 @@ def loadConfig() -> loadTyped:
         debug_mode = config.get("CONFIG", "debug_mode").strip('"').lower()
         debug_dir = config.get("CONFIG", "debug_dir").strip('"')
         version = config.get("CONFIG", "version").strip('"')
+        dx11 = config.get("CONFIG", "dx11").strip('"')
         return {
             "game_paks_directory": game_paks_directory,
             "mod_directory": mod_directory,
@@ -165,14 +169,18 @@ def loadConfig() -> loadTyped:
             "debug_mode": debug_mode,
             "debug_dir": debug_dir,
             "version": version,
+            "dx11": dx11,
         }
     except Exception as e:
         print(f"Error reading config: {e}")
         return None, None, None
 
 
-def runProgram(executable_path, args=""):
+def runProgram(executable_path, args=None):
+
     try:
+        if args is None:
+            args = []
         logging.info("Starting the game")
         print("This cheat is free. If you bought it, you might have been SCAMMED!")
         print("Credits: Xoph")
@@ -182,7 +190,7 @@ def runProgram(executable_path, args=""):
         clear_console()
         # Start the process without admin privileges
         process = subprocess.Popen(
-            [executable_path] + args.split(),
+            [executable_path] + args,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             shell=True,  # This opens a new shell to execute the command
@@ -399,6 +407,9 @@ def runningGame():
         input("Press enter to exit.....")
         return sys.exit(1)
     print("Version 2.0")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-dx11", action="store_true", help="Enable DirectX 11")
+    args = parser.parse_args()
 
     try:
         checkAndSaveConfig()
@@ -412,10 +423,15 @@ def runningGame():
         game_dir = config["game_dir"]
         debug_mode = config["debug_mode"]
         debug_dir = config["debug_dir"]
+        dx11 = config["dx11"]
 
         if game_pak_dir:
             if os.path.exists(game_executable_path):
                 getVersion = checkGameVersion()
+                if args.dx11 or dx11 == "true":
+                    print("DirectX: 11")
+                else:
+                    print("DirectX: 12")
                 print("Installing mod, please wait...")
                 # copyFilesToGameDirectory(game_executable_path, bypass_sig)
                 copyFileToGameDirectory(
@@ -438,12 +454,23 @@ def runningGame():
                 time.sleep(4)
                 clear_console()
                 time.sleep(1)
-                runProgram(
-                    os.path.join(
-                        game_executable_path,
-                        "Client-Win64-Shipping.exe",
+                if args.dx11 or dx11 == "true":
+                    runProgram(
+                        os.path.join(
+                            game_executable_path,
+                            "Client-Win64-Shipping.exe",
+                        ),
+                        args=["-dx11"],
                     )
-                )
+                else:
+                    print("DirectX: 12")
+                    runProgram(
+                        os.path.join(
+                            game_executable_path,
+                            "Client-Win64-Shipping.exe",
+                        ),
+                        args=[],  # No arguments
+                    )
                 print("Removing mod, please wait 5 seconds...")
                 time.sleep(1)
                 deleteModDirectory(game_dir, "Mod")
