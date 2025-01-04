@@ -85,7 +85,7 @@ def saveGameDirectory():
         config.read("config.ini")
         if not config.has_section("CONFIG"):
             config.add_section("CONFIG")
-        # Set game directory
+        # Set Game folder
         gamePaksPath = os.path.join(path, "Client", "Content", "Paks")
         gameExecutablePath = os.path.join(
             path,
@@ -115,7 +115,7 @@ def checkAndSaveConfig():
         createDefaultConfig()
 
     if not config.has_option("CONFIG", "game_paks_directory"):
-        print("Wuthering Waves not found, Select Wuthering Wave Game directory.")
+        print("Wuthering Waves not found, Select Wuthering Wave Game folder.")
         saveGameDirectory()
 
     if not config.has_option("CONFIG", "version"):
@@ -124,7 +124,7 @@ def checkAndSaveConfig():
     game_folder = config.get("CONFIG", "game_paks_directory").strip('"')
 
     if not game_folder:
-        print("Game not found, Select Wuthering Wave Game directory.")
+        print("Game not found, Select Wuthering Wave Game folder.")
         saveGameDirectory()
 
 
@@ -452,10 +452,10 @@ def runningGame():
                 time.sleep(4)
             else:
                 print(
-                    f"Executable '{game_executable_path}' does not exist make sure select Wuthering Wave Game directory, Try to delete config.ini"
+                    f"Executable '{game_executable_path}' does not exist make sure select Wuthering Wave Game folder, Try to delete config.ini"
                 )
                 logging.error(
-                    f"Executable '{game_executable_path}' does not exist make sure select Wuthering Wave Game directory, Try to delete config.ini"
+                    f"Executable '{game_executable_path}' does not exist make sure select Wuthering Wave Game folder, Try to delete config.ini"
                 )
         else:
 
