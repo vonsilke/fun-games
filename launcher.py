@@ -7,6 +7,7 @@ import time
 import ctypes
 from typing import TypedDict
 import sys
+import psutil
 import logging
 
 log_file = "launcher.log"
@@ -15,29 +16,6 @@ logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s - %(levelname)s - %(message)s",
 )
-
-
-def ensure_pip():
-    try:
-        __import__("pip")
-    except ImportError:
-        print("Pip not found, installing...")
-        subprocess.check_call([sys.executable, "-m", "ensurepip", "--default-pip"])
-
-
-def install_packages():
-    ensure_pip()
-    required_packages = ["psutil", "requests"]
-    for package in required_packages:
-        try:
-            __import__(package)
-        except ImportError:
-            subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-
-
-install_packages()
-
-import psutil
 
 config = ConfigParser()
 
@@ -102,28 +80,22 @@ def createDefaultConfig():
 
 
 def saveGameDirectory():
-    path = askdirectory(title="Select Wuthering Wave Folder")
+    path = askdirectory(title="Select Wuthering Wave Game Folder")
     if path:
         config.read("config.ini")
         if not config.has_section("CONFIG"):
             config.add_section("CONFIG")
         # Set game directory
-        gamePaksPath = os.path.join(
-            path, "Wuthering Waves Game", "Client", "Content", "Paks"
-        )
+        gamePaksPath = os.path.join(path, "Client", "Content", "Paks")
         gameExecutablePath = os.path.join(
             path,
-            "Wuthering Waves Game",
             "Client",
             "Binaries",
             "Win64",
         )
-        binaries_path = os.path.join(
-            path, "Wuthering Waves Game", "Client", "Binaries", "Win64"
-        )
+        binaries_path = os.path.join(path, "Client", "Binaries", "Win64")
         game_dir = os.path.join(
             path,
-            "Wuthering Waves Game",
         )
         config.set("CONFIG", "game_executable_path", gameExecutablePath)
         config.set("CONFIG", "game_paks_directory", gamePaksPath)
@@ -143,7 +115,7 @@ def checkAndSaveConfig():
         createDefaultConfig()
 
     if not config.has_option("CONFIG", "game_paks_directory"):
-        print("Wuthering Waves not found, please select a directory.")
+        print("Wuthering Waves not found, Select Wuthering Wave Game directory.")
         saveGameDirectory()
 
     if not config.has_option("CONFIG", "version"):
@@ -152,7 +124,7 @@ def checkAndSaveConfig():
     game_folder = config.get("CONFIG", "game_paks_directory").strip('"')
 
     if not game_folder:
-        print("please select a Wuthering Wave directory.")
+        print("Game not found, Select Wuthering Wave Game directory.")
         saveGameDirectory()
 
 
@@ -201,29 +173,29 @@ def loadConfig() -> loadTyped:
 
 def runProgram(executable_path, args=""):
     try:
-
-        # Start the process as admin
+        logging.info("Starting the game")
+        print("This cheat is free. If you bought it, you might have been SCAMMED!")
+        print("Credits: Xoph")
+        print("Starting the game, Please wait 5 seconds...")
+        time.sleep(5)
+        hide_console()
+        clear_console()
+        # Start the process without admin privileges
         process = subprocess.Popen(
             [executable_path] + args.split(),
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            shell=True,
-            creationflags=subprocess.CREATE_NEW_CONSOLE,
-            close_fds=True,
+            shell=True,  # This opens a new shell to execute the command
+            close_fds=True,  # Close file descriptors
         )
 
-        print("This cheat is free. If you bought it, you might have been SCAMMED!")
-        print("Credits: Xoph")
-        print("Starting the game, Please wait 5 seconds...")
-        logging.info(f"Starting the game")
-        time.sleep(5)
-        hide_console()
-        clear_console()
+        # Optionally, capture the output
+        stdout, stderr = process.communicate()
         monitorProcess(process)
 
     except Exception as e:
-        logging.error(f"Error running executable: {e}")
         print(f"Error running executable: {e}")
+        logging.error(f"Error running executable: {e}")
 
 
 def monitorProcess(process):
@@ -393,10 +365,6 @@ def checkGameVersion():
     config = loadConfig()
     defaultGameVer = ""
 
-    # If version is not set, call setGameVersion() only once
-    if not config.get("version"):  # Use get to prevent KeyError if "version" is missing
-        defaultGameVer = setGameVersion()
-
     # Check if the version is valid (either "CN" or "OS")
     if config["version"] != "CN" and config["version"] != "OS":
         defaultGameVer = setGameVersion()
@@ -479,10 +447,10 @@ def runningGame():
                 time.sleep(4)
             else:
                 print(
-                    f"Executable '{game_executable_path}' does not exist make sure select Wuthering Waves folder, Try to delete config.ini"
+                    f"Executable '{game_executable_path}' does not exist make sure select Wuthering Wave Game directory, Try to delete config.ini"
                 )
                 logging.error(
-                    f"Executable '{game_executable_path}' does not exist make sure select Wuthering Waves folder, Try to delete config.ini"
+                    f"Executable '{game_executable_path}' does not exist make sure select Wuthering Wave Game directory, Try to delete config.ini"
                 )
         else:
 
