@@ -3,4 +3,4 @@
     - Step installation, check the box `Add ptyhon.exe to PATH` after that click `Install Now`
       ![images](https://raw.githubusercontent.com/saefulbarkah/fun-games/refs/heads/main/how_to_install_python.PNG)
 3. [Download this](https://github.com/saefulbarkah/fun-games/archive/refs/heads/main.zip) extract the zip
-2. Run run.bat
+2. Open folder fun-games-main, and click run.bat
