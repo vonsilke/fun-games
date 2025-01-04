@@ -380,6 +380,11 @@ def checkGameVersion():
     with open("./pak/bypass/libraries.txt", "w") as file:
         file.write(defaultGameVer)
 
+    if config["version"] == "OS":
+        print("Game Version: Global")
+    if config["version"] == "CN":
+        print("Game Version: CN")
+
     return defaultGameVer
 
 
