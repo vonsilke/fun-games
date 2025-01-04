@@ -214,10 +214,11 @@ def runProgram(executable_path, args=""):
 
         print("This cheat is free. If you bought it, you might have been SCAMMED!")
         print("Credits: Xoph")
-        print("Starting the game, Please wait 10 seconds...")
+        print("Starting the game, Please wait 5 seconds...")
         logging.info(f"Starting the game")
-        time.sleep(10)
+        time.sleep(5)
         hide_console()
+        clear_console()
         monitorProcess(process)
 
     except Exception as e:
@@ -229,7 +230,7 @@ def monitorProcess(process):
     try:
         while True:
             if process.poll() is not None:  # Check if the process has terminated
-                # asdasd
+                show_console()
                 break  # Exit the loop if the process has terminated
 
             time.sleep(5)  # Check every 5 seconds
@@ -360,7 +361,7 @@ def setGameVersion():
         clear_console()
         print("Select Game Version: \n")
         print("  1. OS Version (Global)")
-        print("  2. CN Version")
+        print("  2. CN Version ")
         print("\nPlease select a version (1 or 2): ", end="")
 
         ver = input().strip()
@@ -455,23 +456,27 @@ def runningGame():
                 )
                 copyFolderToGameDirectory(game_pak_dir, loader_dir)
                 copyFolderToGameDirectory(game_dir, mod_dir)
+                filter_file_deleted.extend([getVersion])
                 if debug_mode == "true":
                     print("Dev mode")
                     copyFilesToGameDirectory(
                         os.path.join(game_pak_dir, "~mods/"), debug_dir
                     )
-                time.sleep(2)
+                time.sleep(4)
+                clear_console()
+                time.sleep(1)
                 runProgram(
                     os.path.join(
                         game_executable_path,
                         "Client-Win64-Shipping.exe",
                     )
                 )
-                filter_file_deleted.extend([ww_os_pak, ww_cn_pak])
+                print("Removing mod, please wait 5 seconds...")
+                time.sleep(1)
                 deleteModDirectory(game_dir, "Mod")
                 deleteModDirectory(game_pak_dir, "~mods")
                 delete_files_from_list(binaries_dir, filter_file_deleted)
-                # time.sleep(1)
+                time.sleep(4)
             else:
                 print(
                     f"Executable '{game_executable_path}' does not exist make sure select Wuthering Waves folder, Try to delete config.ini"
