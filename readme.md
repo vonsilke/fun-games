@@ -4,7 +4,7 @@ Source Code: [Waves Mod 2.0](https://github.com/saefulbarkah/wuthering-wave-mod)
 ## HOW TO USE
 1. Download [launcher](https://github.com/saefulbarkah/fun-games/releases/download/2.0-launcher/fun-games-launcher.rar)
 2. Extract it, run laucher.exe
-3. Select `Wuthering Waves` folder
+3. Select `Wuthering Waves Game` folder
 4. While in login menu showing `MOD LOADED` you can open menu with `ALT + X`
 
 ## DISABLE LOGS
