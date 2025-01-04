@@ -1,4 +1,5 @@
 # 2.0 GLOBAL VERSION
+Source Code: [Waves Mod 2.0](https://github.com/saefulbarkah/wuthering-wave-mod)
 
 ## HOW TO USE
 1. Download [launcher](https://github.com/saefulbarkah/fun-games/releases/download/2.0-launcher/fun-games-launcher.rar)
