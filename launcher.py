@@ -21,11 +21,12 @@ logging.basicConfig(
 config = ConfigParser()
 
 filter_file_deleted = [
+    "config.json",
     "libraries.txt",
     "winhttp.dll",
 ]
-ww_os_pak = "ww-patch-os.dll"
-ww_cn_pak = "ww-patch-cn.dll"
+ww_os_pak = "CenSerPatch-OS.dll"
+ww_cn_pak = "CenSerPatch-CN.dll"
 
 
 def hide_console():
@@ -177,7 +178,7 @@ def loadConfig() -> loadTyped:
 
 
 def runProgram(executable_path, args=None):
-
+    cfg = loadConfig()
     try:
         if args is None:
             args = []
@@ -195,6 +196,7 @@ def runProgram(executable_path, args=None):
             stderr=subprocess.PIPE,
             shell=True,  # This opens a new shell to execute the command
             close_fds=True,  # Close file descriptors
+            cwd=cfg["game_executable_path"],
         )
 
         # Optionally, capture the output
@@ -379,10 +381,10 @@ def checkGameVersion():
 
     # Set the default game version based on config
     if config["version"] == "CN":
-        defaultGameVer = "ww-patch-cn.dll"
+        defaultGameVer = ww_cn_pak
 
     if config["version"] == "OS":
-        defaultGameVer = "ww-patch-os.dll"
+        defaultGameVer = ww_os_pak
 
     # Write the selected game version to the file
     with open("./pak/bypass/libraries.txt", "w") as file:
@@ -436,6 +438,9 @@ def runningGame():
                 # copyFilesToGameDirectory(game_executable_path, bypass_sig)
                 copyFileToGameDirectory(
                     game_executable_path, "./pak/bypass/winhttp.dll"
+                )
+                copyFileToGameDirectory(
+                    game_executable_path, "./pak/bypass/config.json"
                 )
                 copyFileToGameDirectory(
                     game_executable_path, f"./pak/bypass/{getVersion}"
