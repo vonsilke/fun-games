@@ -1,4 +1,4 @@
-# 2.0 GLOBAL VERSION
+# 2.0
 Source Code: [Waves Mod 2.0](https://github.com/saefulbarkah/wuthering-wave-mod)
 
 ## HOW TO USE
