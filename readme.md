@@ -5,7 +5,7 @@ Source Code: [Waves Mod 2.0](https://github.com/saefulbarkah/wuthering-wave-mod)
 - To avoid softlocked, Turn off `Kill Aura` while doing Quest.
 
 ## HOW TO USE
-1. Download [launcher](https://github.com/saefulbarkah/fun-games/releases/tag/2.0.2)
+1. Download [latest version launcher](https://github.com/saefulbarkah/fun-games/releases)
 2. Extract it, run laucher.exe
 3. Select `Wuthering Waves Game` folder
 4. While in login menu showing `MOD LOADED` you can open menu with `ALT + X`
