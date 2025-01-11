@@ -13,3 +13,40 @@
 
 ## Features
 - Open Menu (Alt + X)
+
+#### Player
+- Player Speed
+- God Mode
+- No Cooldown Skill (Include Inf forte, Energy, auto QTE)
+- Hit Muliplier -> Max 100
+- Always Critical Hit
+- Infinite Stamina
+- Mark Teleport
+- Quest Teleport
+
+#### World
+- World Speed
+- Skip Cutscene
+- Auto Loot
+- Auto Absorb
+- Auto Treasure
+- Auto Puzzle
+- kill Animal
+- Kill Aura
+- Mob Vacuum
+- Collection Vacuum
+
+#### Buff
+- Illusive Sprint
+- Super buff
+- 50% Echo
+- 50% Gold
+- 50% Mats
+
+#### Teleport
+- Custom Teleport
+- Teleport list
+   - 100% all map
+   - All Echoes
+   - Farm echoes set
+- Auto teleport
